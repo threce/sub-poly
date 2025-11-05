@@ -10,13 +10,18 @@ class VlessConverter {
             port: parseInt(url.port) || 443,
             uuid: url.username,
             udp: true,
-            tls: url.tls?true:false,
             network: params.get('type') || 'tcp',
             'skip-cert-verify': params.get('allowInsecure') === '1',
             servername: params.get('sni') || url.hostname,
             flow: params.get('flow') || '',
             'client-fingerprint': params.get('fp') || ''
         };
+
+		if (params.get('tls') === 'true') {
+            config.tls = true;
+        } else {
+            config.tls = false;
+        }
 
         // 处理 WS 配置
         if (config.network === 'ws') {
