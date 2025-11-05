@@ -10,7 +10,7 @@ class VlessConverter {
             port: parseInt(url.port) || 443,
             uuid: url.username,
             udp: true,
-            tls: true,
+            tls: url.tls?true:false,
             network: params.get('type') || 'tcp',
             'skip-cert-verify': params.get('allowInsecure') === '1',
             servername: params.get('sni') || url.hostname,
